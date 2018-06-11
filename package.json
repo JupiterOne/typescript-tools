@@ -44,6 +44,7 @@
     "typescript": "^2.9.1"
   },
   "devDependencies": {
+    "@lifeomic/deploy-tools": "^1.0.3",
     "@lifeomic/dev-tools": "^4.2.3",
     "@lifeomic/eslint-plugin-node": "^1.1.1",
     "child-process-promise": "^2.2.1",
