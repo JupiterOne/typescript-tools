@@ -1,6 +1,6 @@
 {
   "name": "@lifeomic/typescript-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
   "author": "Development <development@lifeomic.com>",
