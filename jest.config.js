@@ -1,5 +1,7 @@
 module.exports = {
   ...require('./config/jest'),
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.ts'],
   coverageThreshold: {
     global: {
       statements: 100,

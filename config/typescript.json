@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
-    "baseUrl": ".",
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
