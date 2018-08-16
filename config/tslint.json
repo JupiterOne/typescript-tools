@@ -4,6 +4,7 @@
     "interface-name": false,
     "object-literal-sort-keys": false,
     "no-var-requires": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "no-unused-variable": false
   }
 }
