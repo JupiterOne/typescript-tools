@@ -6,4 +6,8 @@ ignore:
     - '*':
         reason: No upgrade available
         expires: 2018-09-15T02:34:15.085Z
+  'npm:mem:20180117':
+    - '*':
+        reason: No upgrade available
+        expires: 2018-10-07T04:17:37.733Z
 patch: {}
