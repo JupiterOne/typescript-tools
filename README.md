@@ -33,13 +33,10 @@ Create `lint-staged.config.js` at root of your project that contains:
 module.exports = require('@lifeomic/typescript-tools/config/lint-staged');
 ```
 
-Modify your `package.json` to include the following:
+Create `.huskyrc.js` at root of your project that contains:
 
-```json
-  "scripts": {
-    ...
-    "precommit": "lint-staged"
-  }
+```javascript
+module.exports = require('@lifeomic/typescript-tools/config/husky');
 ```
 
 Also, the following `.prettierignore` file is recommended:
@@ -49,6 +46,7 @@ dist/
 work/
 node_modules/
 coverage/
+package.json
 ```
 
 ## Usage: Jest
