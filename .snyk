@@ -2,12 +2,8 @@
 version: v1.12.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  'npm:chownr:20180731':
-    - '*':
-        reason: No upgrade available
-        expires: 2018-11-15T02:34:15.085Z
   'npm:mem:20180117':
-    - '*':
-        reason: No upgrade available
-        expires: 2018-11-15T04:17:37.733Z
+    - 'jest@23 > *':
+        reason: Dev dependency, and no jest / ts-jest pair is avilable with a fix
+        expires: 2019-05-15T04:17:37.733Z
 patch: {}
