@@ -1,6 +1,6 @@
 {
   "name": "@lifeomic/typescript-tools",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
   "author": "Development <development@lifeomic.com>",
@@ -35,6 +35,7 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-semistandard": "^7.0.0",
+    "tslint-react-hooks": "^2.0.0",
     "typescript": "^3.3.3"
   },
   "devDependencies": {
