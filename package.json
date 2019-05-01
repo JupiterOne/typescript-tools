@@ -36,7 +36,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-semistandard": "^7.0.0",
     "tslint-react-hooks": "^2.0.0",
-    "typescript": "^3.3.3"
+    "typescript": "^3.4.5"
   },
   "devDependencies": {
     "@lifeomic/deploy-tools": "^1.1.2",
