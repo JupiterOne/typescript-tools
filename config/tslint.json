@@ -11,6 +11,6 @@
     "ordered-imports": false,
     "no-unused-variable": false,
     "react-hooks-nesting": "error",
-    "no-implicit-dependencies": [ true, "dev", [ "aws-sdk" ] ]
+    "no-implicit-dependencies": [true, "dev"]
   }
 }
