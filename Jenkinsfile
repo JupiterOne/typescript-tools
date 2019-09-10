@@ -4,49 +4,28 @@ pipeline {
   agent none
 
   options {
-    ansiColor("xterm")
+    ansiColor('xterm')
     timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '10'))
   }
 
   stages {
-    stage('Builder') {
-      agent none
-      steps {
-        script {
-          builderNode {
-            stage('Prepare') {
-              checkout scm
-              sh '''
-              yarn install
-              '''
-            }
+    stage('Build Setup') {
+      parallel {
+        stage('Build') {
+          agent { label 'ecs-builder' }
+          steps {
+            initBuild()
 
-            parallel(
-              'Lint': {
-                stage('Lint') {
-                  sh 'yarn lint'
-                }
-              },
+            sh 'yarn install'
+            sh 'yarn lint'
+            sh 'yarn test:ci'
 
-              'Test': {
-                stage('Test') {
-                  sh 'yarn test:ci'
-                }
-              },
+            securityScan()
 
-              'Security Scan': {
-                stage('Security Scan') {
-                  securityScan()
-                }
-              }
-            )
-
-            if (env.BRANCH_NAME == 'master') {
-              stage('Publish') {
-                sh '''
-                ./node_modules/@lifeomic/dev-tools/bin/lifeomic-publish-npm-package --publish-tagged-commits-only
-                '''
-                updateDependentProjects()
+            script {
+              if (env.BRANCH_NAME == 'master') {
+                publishNpmPackage('.')
               }
             }
           }
