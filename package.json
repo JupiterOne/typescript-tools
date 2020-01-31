@@ -13,7 +13,10 @@
   "eslintConfig": {
     "extends": [
       "plugin:@lifeomic/node/recommended"
-    ]
+    ],
+    "rules": {
+      "comma-dangle": "off"
+    }
   },
   "eslintIgnore": [
     "test/fixtures/**/*",
