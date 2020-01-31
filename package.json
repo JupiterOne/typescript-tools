@@ -13,7 +13,10 @@
   "eslintConfig": {
     "extends": [
       "plugin:@lifeomic/node/recommended"
-    ]
+    ],
+    "rules": {
+      "comma-dangle": "off"
+    }
   },
   "eslintIgnore": [
     "test/fixtures/**/*",
@@ -27,6 +30,7 @@
     "fs-extra": "^8.1.0",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
+    "jest-circus": "^25.1.0",
     "lint-staged": "^9.2.5",
     "prettier": "^1.19.1",
     "ts-jest": "^24.0.2",

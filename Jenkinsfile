@@ -13,7 +13,7 @@ pipeline {
     stage('Build Setup') {
       parallel {
         stage('Build') {
-          agent { label 'ecs-builder' }
+          agent { label 'ecs-builder-node12' }
           steps {
             initBuild()
 
