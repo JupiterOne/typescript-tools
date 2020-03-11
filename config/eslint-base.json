@@ -1,0 +1,14 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "ignorePatterns": ["node_modules/", "dist/", "work/", "coverage/"],
+  "overrides": [
+    {
+      "files": ["jest.*.js", "*.test.ts"],
+      "extends": ["plugin:jest/recommended"]
+    }
+  ]
+}
