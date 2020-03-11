@@ -7,14 +7,10 @@ Version `v9.x.x` of this package makes `eslint` the preferred linter since
 `tslint` rules exactly but we can continue to tweak these or provide a separate
 config or plugin package for better control.
 
-- Remove `tslint` from your project since `tslint` is deprecated
-  - Remove `tslint.json`
+- Remove `tslint.json` from your project since `tslint` is deprecated
 - Change your linting command to `eslint .`
   - For example, in `package.json` use `"lint": "eslint ."`
 - Follow instructions for **Usage: eslint** in the README.md.
-
-**NOTE:** `tslint` will be removed completely in a future version of
-`@lifeomic/typescript-tools` so please start switching to `eslint`.
 
 ## v8.0.0
 

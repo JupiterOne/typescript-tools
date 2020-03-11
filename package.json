@@ -26,10 +26,6 @@
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "ts-jest": "^25.2.1",
-    "tslint": "^6.1.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-config-semistandard": "^8.0.1",
-    "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.8.3"
   },
   "devDependencies": {

@@ -99,7 +99,7 @@ yarn type-check
 
 **NOTE:** `type-check` utility script runs `tsc --noEmit`.
 
-### Usage: ESLint
+## Usage: ESLint
 
 This package contains `eslint` configuration for both backend (Node.js) and
 frontend (React) so pick the configuration that is appropriate for your project.
@@ -112,7 +112,7 @@ The current eslint configuration is based on
 removed using the `eslint-config-prettier` config since we are using `prettier`
 to automatically format code.
 
-#### eslint configuration for Node.js
+### ESLint configuration for Node.js
 
 Create `.eslintrc` at root of your project that contains:
 
@@ -135,7 +135,7 @@ Create `test/.eslintrc` so that `jest` globals are recognized:
 }
 ```
 
-#### eslint configuration for React
+### ESLint configuration for React
 
 Create `.eslintrc` at root of your project that contains:
 
