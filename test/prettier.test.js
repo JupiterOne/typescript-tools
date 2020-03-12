@@ -15,7 +15,6 @@ test('prettier should replace double quotes with single quotes', async () => {
 
   await exec(`yarn run prettier --write ${tempSrcFile}`);
 
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
   const result = await fs.readFile(tempSrcFile, { encoding: 'utf8' });
   expect(result.trim()).toBe("console.log('Hello');");
 });
