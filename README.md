@@ -141,16 +141,6 @@ Create `.eslintrc` at root of your project that contains:
 }
 ```
 
-Create `test/.eslintrc` so that `jest` globals are recognized:
-
-```json
-{
-  "extends": [
-    "../node_modules/@lifeomic/typescript-tools/config/eslint-jest.json"
-  ]
-}
-```
-
 ### ESLint configuration for React
 
 Create `.eslintrc` at root of your project that contains:
@@ -160,16 +150,6 @@ Create `.eslintrc` at root of your project that contains:
   "root": true,
   "extends": [
     "./node_modules/@lifeomic/typescript-tools/config/eslint-react.json"
-  ]
-}
-```
-
-Create `test/.eslintrc` so that `jest` globals are recognized:
-
-```json
-{
-  "extends": [
-    "../node_modules/@lifeomic/typescript-tools/config/eslint-jest.json"
   ]
 }
 ```
