@@ -8,17 +8,19 @@ Version `v9.x.x` of this package makes `eslint` the preferred linter since
 config or plugin package for better control.
 
 - Remove `tslint.json` from your project since `tslint` is deprecated
-- Change your linting command to `eslint .`
-  - For example, in `package.json` use `"lint": "eslint ."`
-- Follow instructions for **Usage: eslint** in the README.md.
+- Change your linting command to use `eslint`
+  - For example, in `package.json` use
+    `"lint": "eslint --ext .ts,.tsx,.js,.jsx ."` (make sure you add the `--ext`
+    argument!)
+- Follow instructions for **Usage: ESLint** in the README.md.
 
 ## v8.0.0
 
 Use `jest-circus` for default test runner. For context, see links:
 
-- https://github.com/facebook/jest/issues/8484
-- https://github.com/lifeomic/lambda-tools/pull/191
-- https://www.npmjs.com/package/jest-circus
+- <https://github.com/facebook/jest/issues/8484>
+- <https://github.com/lifeomic/lambda-tools/pull/191>
+- <https://www.npmjs.com/package/jest-circus>
 
 This shouldn't break anyone, but bumping major versions since it is a
 substantial change to how events/jest hooks are handled.

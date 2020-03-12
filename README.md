@@ -112,6 +112,22 @@ The current eslint configuration is based on
 removed using the `eslint-config-prettier` config since we are using `prettier`
 to automatically format code.
 
+Run `eslint` using the following command:
+
+```sh
+yarn eslint --ext .ts,.tsx.js,.jsx .
+```
+
+In your `package.json` add the following to the `scripts` section:
+
+```json
+"lint": "eslint --ext .ts,.tsx,.js,.jsx ."
+```
+
+**IMPORTANT:** You currently must explicitly add the `--ext` argument because
+`eslint` will only check `.js` files by default and you can't control this from
+the eslint configuration.
+
 ### ESLint configuration for Node.js
 
 Create `.eslintrc` at root of your project that contains:
