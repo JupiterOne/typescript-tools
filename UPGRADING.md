@@ -1,5 +1,23 @@
 # Upgrading
 
+## v10.0.0
+
+Version `v10` upgrades to `prettier` 2.0. When formatting code you will see
+minor differences in how lines are wrapped and where spacing is added.
+
+`prettier` 2.0 also supports typescript 3.8+ which means that it will support
+newer language features such as `import type`.
+
+Full details about `prettier` 2.0 are described here:
+
+<https://prettier.io/blog/2020/03/21/2.0.0.html>
+
+**TIP:**
+
+The formatting changes might affect most files so it is recommended to run
+`prettier --write '**/*.{js,ts,md,json}'` in a branch and have those changes
+reviewed separately from other changes.
+
 ## v9.0.0
 
 Version `v9.x.x` of this package makes `eslint` the preferred linter since
