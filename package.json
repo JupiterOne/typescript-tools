@@ -1,6 +1,6 @@
 {
   "name": "@lifeomic/typescript-tools",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
   "author": "Development <development@lifeomic.com>",
@@ -26,7 +26,7 @@
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
     "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.2",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
