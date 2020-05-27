@@ -1,6 +1,6 @@
 {
   "name": "@lifeomic/typescript-tools",
-  "version": "10.0.1",
+  "version": "10.0.2",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
   "author": "Development <development@lifeomic.com>",
@@ -22,7 +22,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-jest": "^23.8.2",
     "fs-extra": "^8.1.0",
-    "husky": "^4.2.3",
+    "husky": "^4.2.5",
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
     "lint-staged": "^10.0.8",
