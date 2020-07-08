@@ -1,5 +1,5 @@
 {
-  "name": "@lifeomic/typescript-tools",
+  "name": "@jupiterone/typescript-tools",
   "version": "11.0.0",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
@@ -31,7 +31,7 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
-    "@lifeomic/dev-tools": "^5.3.0",
+    "@jupiterone/dev-tools": "^5.3.4",
     "child-process-promise": "^2.2.1",
     "uuid": "^8.2.0"
   },
