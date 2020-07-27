@@ -107,10 +107,43 @@ frontend (React) so pick the configuration that is appropriate for your project.
 Regardless of target environment, you can always add `.eslintignore` to ignore
 certain files in your project.
 
-The current eslint configuration is based on
-[eslint:recommended](https://eslint.org/docs/rules/) except formatting rules are
-removed using the `eslint-config-prettier` config since we are using `prettier`
-to automatically format code.
+The current eslint configuration extends the following:
+
+- [eslint:recommended](https://eslint.org/docs/rules/): Built-in ecommended
+  rules for `eslint`.
+- [@typescript-eslint/recommended](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/src/configs#recommended):
+  Opionated rules that don't require type information.
+- [@typescript-eslint/recommended-requiring-type-checking](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/src/configs#recommended-requiring-type-checking):
+  Opionated rules that use typescript type information (requires
+  `parserOptions.project` in `eslint` config).
+- [prettier/@typescript-eslint](https://github.com/prettier/eslint-config-prettier):
+  Disables rules that `prettier` will automatically fix.
+
+After extending the configurations above, the following rule overrides are
+provided by `@lifeomic/typescript-tools`:
+
+- `@typescript-eslint/explicit-function-return-type": "off"`
+- `@typescript-eslint/no-explicit-any": "off"`
+- `@typescript-eslint/no-inferrable-types": "off"`
+- `@typescript-eslint/no-non-null-assertion": "off"`
+- `@typescript-eslint/no-require-imports": "off"`
+- `@typescript-eslint/no-unused-vars": "off"`
+- `@typescript-eslint/no-use-before-define": "off"`
+- `@typescript-eslint/no-var-requires": "off"`
+- `@typescript-eslint/no-unsafe-return": "off"`
+- `@typescript-eslint/no-unsafe-call": "off"`
+- `@typescript-eslint/restrict-plus-operands": "off"`
+- `@typescript-eslint/restrict-template-expressions": "off"`
+- `@typescript-eslint/no-unsafe-assignment": "off"`
+- `@typescript-eslint/prefer-string-starts-ends-with": "off"`
+- `@typescript-eslint/require-await": "off"`
+- `@typescript-eslint/no-unsafe-member-access": "off"`
+- `@typescript-eslint/unbound-method": "off"`
+- `@typescript-eslint/explicit-module-boundary-types": "off"`
+
+See
+<https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin>
+for documentation on eslint rules for typescript.
 
 Run `eslint` using the following command:
 
@@ -137,8 +170,25 @@ Create `.eslintrc` at root of your project that contains:
   "root": true,
   "extends": [
     "./node_modules/@lifeomic/typescript-tools/config/eslint-node.json"
-  ]
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  }
 }
+```
+
+**IMPORTANT:** If you are linting `*.js` files (which are enabled by via `--ext`
+argument) then make sure `allowJs: true` is set in your `tsconfig.json`, and
+also make sure the `*.js` files are included via the `include`/`exclude`
+patterns in your `tsconfig.json` files. If the typescript compiler does not
+process the `*.js` files then you'll see eslint errors similar to the following:
+
+```
+/Development/my-project/my-file.js
+  0:0  error  Parsing error: "parserOptions.project" has been set for @typescript-eslint/parser.
+The file does not match your project config: my-file.js.
+The file must be included in at least one of the projects provided
 ```
 
 ### ESLint configuration for React

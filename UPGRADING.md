@@ -1,5 +1,37 @@
 # Upgrading
 
+## v11.0.0
+
+The base typescript config now uses `ES2019` as the target.
+
+In version `v10.0.0` of `@lifeomic/typescript-tools` "floating promises" were
+not linted properly because rules that required type information were not
+enabled. This is fixed in `v11.0.0` and higher of `@lifeomic/typescript-tools`.
+
+The tsconfig option `allowJs` is now `true` by default to enable eslint type
+checking in these files.
+
+The eslint configuration now enables rules that require type information. These
+rules can be found here:
+
+<https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/src/configs/recommended-requiring-type-checking.ts>
+
+To support these rules, modify your `.eslintrc` to have `parserOptions` as shown
+in example below:
+
+```json
+{
+  "root": true,
+  "extends": [
+    "./node_modules/@lifeomic/typescript-tools/config/eslint-node.json"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  }
+}
+```
+
 ## v10.0.0
 
 Version `v10` upgrades to `prettier` 2.0. When formatting code you will see
