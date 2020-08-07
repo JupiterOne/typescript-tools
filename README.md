@@ -24,19 +24,19 @@ dependencies:
 Create `prettier.config.js` at root of your project that contains:
 
 ```javascript
-module.exports = require('@lifeomic/typescript-tools/config/prettier');
+module.exports = require('@jupiterone/typescript-tools/config/prettier');
 ```
 
 Create `lint-staged.config.js` at root of your project that contains:
 
 ```javascript
-module.exports = require('@lifeomic/typescript-tools/config/lint-staged');
+module.exports = require('@jupiterone/typescript-tools/config/lint-staged');
 ```
 
 Create `.huskyrc.js` at root of your project that contains:
 
 ```javascript
-module.exports = require('@lifeomic/typescript-tools/config/husky');
+module.exports = require('@jupiterone/typescript-tools/config/husky');
 ```
 
 Also, the following `.prettierignore` file is recommended:
@@ -55,7 +55,7 @@ Create `jest.config.js` at root of your project that contains:
 
 ```javascript
 module.exports = {
-  ...require('@lifeomic/typescript-tools/config/jest'),
+  ...require('@jupiterone/typescript-tools/config/jest'),
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts'],
   coverageThreshold: {
@@ -75,7 +75,7 @@ Create `tsconfig.json` at root of your project that contains:
 
 ```json
 {
-  "extends": "./node_modules/@lifeomic/typescript-tools/config/typescript",
+  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript",
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": "."
@@ -169,7 +169,7 @@ Create `.eslintrc` at root of your project that contains:
 {
   "root": true,
   "extends": [
-    "./node_modules/@lifeomic/typescript-tools/config/eslint-node.json"
+    "./node_modules/@jupiterone/typescript-tools/config/eslint-node.json"
   ],
   "parserOptions": {
     "project": "./tsconfig.json",
@@ -199,7 +199,7 @@ Create `.eslintrc` at root of your project that contains:
 {
   "root": true,
   "extends": [
-    "./node_modules/@lifeomic/typescript-tools/config/eslint-react.json"
+    "./node_modules/@jupiterone/typescript-tools/config/eslint-react.json"
   ]
 }
 ```
@@ -211,7 +211,7 @@ If your build output will be published as an NPM package, the following
 
 ```plain
 {
-  "extends": "./node_modules/@lifeomic/typescript-tools/config/typescript",
+  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
@@ -233,5 +233,5 @@ Your project's `Jenkinsfile` should contain the following command in the
 `publish` stage:
 
 ```bash
-./node_modules/@lifeomic/dev-tools/bin/lifeomic-publish-npm-package --directory ./dist --publish-tagged-commits-only
+./node_modules/@jupiterone/dev-tools/bin/lifeomic-publish-npm-package --directory ./dist --publish-tagged-commits-only
 ```
