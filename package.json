@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "11.0.0",
+  "version": "12.0.0",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
   "author": "Development <development@lifeomic.com>",
@@ -15,25 +15,25 @@
     "type-check": "./bin/type-check"
   },
   "dependencies": {
-    "@types/jest": "^26.0.7",
-    "@typescript-eslint/eslint-plugin": "^3.7.0",
-    "@typescript-eslint/parser": "^3.7.0",
-    "eslint": "^7.5.0",
+    "@types/jest": "^26.0.10",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/parser": "^3.9.1",
+    "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-jest": "^23.18.2",
+    "eslint-plugin-jest": "^23.20.0",
     "fs-extra": "^9.0.1",
     "husky": "^4.2.5",
-    "jest": "^26.1.0",
-    "jest-circus": "^26.1.0",
+    "jest": "^26.4.1",
+    "jest-circus": "^26.4.1",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "ts-jest": "^26.1.3",
-    "typescript": "^3.9.7"
+    "ts-jest": "^26.2.0",
+    "typescript": "^4.0.2"
   },
   "devDependencies": {
-    "@jupiterone/dev-tools": "^5.3.4",
+    "@jupiterone/dev-tools": "^5.3.7",
     "child-process-promise": "^2.2.1",
-    "uuid": "^8.2.0"
+    "uuid": "^8.3.0"
   },
   "files": [
     "config/**/*",
