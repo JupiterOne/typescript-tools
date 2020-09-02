@@ -25,7 +25,7 @@ pipeline {
 
             script {
               if (env.BRANCH_NAME == 'master') {
-                publishNpmPackage('.')
+                sh 'npx jupiterone-publish-npm-package --public --directory .'
               }
             }
           }
