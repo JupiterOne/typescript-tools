@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "12.0.0",
+  "version": "12.0.1",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/lifeomic/typescript-tools",
   "author": "Development <development@lifeomic.com>",
