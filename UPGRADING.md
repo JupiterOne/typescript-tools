@@ -1,5 +1,68 @@
 # Upgrading
 
+## v12.0.0
+
+The out-of-the-box typescript configuration in `@jupiterone/typescript-tools`
+supports using paths prefixed with `~` as an alias to the project root.
+
+For example, you can use the following `import`:
+
+```typescript
+`import { doSomething } from '~/src/util'`;
+```
+
+You can use the following command to rewrite your `*.ts` files to use the
+preferred `import` path syntax by running:
+
+```sh
+yarn rewrite-imports --dir .
+```
+
+For Node.js projects, modify your `tsconfig.json` to use:
+
+```
+"extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node12"
+```
+
+The Node.js configuration uses the `ES2019` target per instructions at
+<https://www.typescriptlang.org/tsconfig#target>.
+
+Add `babel.config.js` to the root of your project (see README.md for additional
+instructions).
+
+Most projects can use a `jest.config.js` similar to the following:
+
+```javascript
+module.exports = {
+  ...require('@jupiterone/typescript-tools/config/jest'),
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.ts', '!src/logging.ts'],
+  coverageThreshold: {
+    global: {
+      statements: 50,
+      branches: 50,
+      functions: 50,
+      lines: 50,
+    },
+  },
+};
+```
+
+If you are building a shareable package use the following command to compile
+your typescript files:
+
+```sh
+yarn ttsc --declaration -p tsconfig.dist.json
+```
+
+If you are building a lambda function and you don't need the `*.d.ts` files then
+you can use the following command:
+
+```sh
+yarn babel . --extensions '.ts' --only 'src/' --out-dir './dist'
+```
+
 ## v11.0.0
 
 The base typescript config now uses `ES2019` as the target.

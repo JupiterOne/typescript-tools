@@ -1,0 +1,6 @@
+{
+  "extends": "./typescript",
+  "compilerOptions": {
+    "target": "ES2019"
+  }
+}
