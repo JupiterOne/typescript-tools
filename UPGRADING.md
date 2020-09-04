@@ -67,9 +67,10 @@ yarn babel . --extensions '.ts' --only 'src/' --out-dir './dist'
 
 The base typescript config now uses `ES2019` as the target.
 
-In version `v10.0.0` of `@lifeomic/typescript-tools` "floating promises" were
+In version `v10.0.0` of `@jupiterone/typescript-tools` "floating promises" were
 not linted properly because rules that required type information were not
-enabled. This is fixed in `v11.0.0` and higher of `@lifeomic/typescript-tools`.
+enabled. This is fixed in `v11.0.0` and higher of
+`@jupiterone/typescript-tools`.
 
 The tsconfig option `allowJs` is now `true` by default to enable eslint type
 checking in these files.
@@ -86,7 +87,7 @@ in example below:
 {
   "root": true,
   "extends": [
-    "./node_modules/@lifeomic/typescript-tools/config/eslint-node.json"
+    "./node_modules/@jupiterone/typescript-tools/config/eslint-node.json"
   ],
   "parserOptions": {
     "project": "./tsconfig.json",
@@ -132,7 +133,7 @@ config or plugin package for better control.
 Use `jest-circus` for default test runner. For context, see links:
 
 - <https://github.com/facebook/jest/issues/8484>
-- <https://github.com/lifeomic/lambda-tools/pull/191>
+- <https://github.com/jupiterone/lambda-tools/pull/191>
 - <https://www.npmjs.com/package/jest-circus>
 
 This shouldn't break anyone, but bumping major versions since it is a

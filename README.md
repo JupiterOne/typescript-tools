@@ -148,7 +148,7 @@ The current eslint configuration extends the following:
   Disables rules that `prettier` will automatically fix.
 
 After extending the configurations above, the following rule overrides are
-provided by `@lifeomic/typescript-tools`:
+provided by `@jupiterone/typescript-tools`:
 
 - `@typescript-eslint/explicit-function-return-type": "off"`
 - `@typescript-eslint/no-explicit-any": "off"`
@@ -230,36 +230,4 @@ Create `.eslintrc` at root of your project that contains:
     "./node_modules/@jupiterone/typescript-tools/config/eslint-react.json"
   ]
 }
-```
-
-## Usage: Publishing Node.js Package
-
-If your build output will be published as an NPM package, the following
-`tsconfig.json` is recommended:
-
-```plain
-{
-  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": ".",
-    "module": "CommonJS"
-  },
-  "include": ["src/**/*"]
-}
-```
-
-The following `.npmignore` file is recommended:
-
-```plain
-*.test.js
-*.test.d.ts
-```
-
-Your project's `Jenkinsfile` should contain the following command in the
-`publish` stage:
-
-```bash
-./node_modules/@jupiterone/dev-tools/bin/lifeomic-publish-npm-package --directory ./dist --publish-tagged-commits-only
 ```
