@@ -38,6 +38,8 @@ module.exports = {
   setupFilesAfterEnv: ['./jest.setup.ts'],
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts', '!src/logging.ts'],
+
+  // Default thresholds are at 100% code coverage but these can be adjusted
   coverageThreshold: {
     global: {
       statements: 50,
