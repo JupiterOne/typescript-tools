@@ -1,12 +1,21 @@
 module.exports = {
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  },
-  testRunner: 'jest-circus/runner',
+  clearMocks: true,
   testMatch: [
     '<rootDir>/src/**/*.test.{js,jsx,ts,tsx}',
     '<rootDir>/test/**/*.test.{js,jsx,ts,tsx}',
-    '<rootDir>/lambda/**/*.test.{js,jsx,ts,tsx}',
   ],
-  moduleFileExtensions: ['js', 'json', 'ts', 'tsx', 'jsx', 'node', 'mjs'],
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.ts', '!**/*.test.ts', '!**/__tests__/**'],
+  coverageThreshold: {
+    global: {
+      statements: 100,
+      branches: 100,
+      functions: 100,
+      lines: 100,
+    },
+  },
+  testEnvironment: 'node',
+  moduleNameMapper: {
+    '^~(/.*)$': '<rootDir>$1',
+  },
 };

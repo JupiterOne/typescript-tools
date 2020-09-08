@@ -19,7 +19,6 @@ pipeline {
 
             sh 'yarn install'
             sh 'yarn lint'
-            sh 'yarn test:ci'
 
             securityScan()
 

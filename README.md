@@ -12,12 +12,16 @@ dependencies:
 
 - `jest`
 
+- `babel` (used by `jest` and for building/transpiling)
+
 - `eslint`
 
 - `husky` (allows you specify git hook scripts in your `package.json`)
 
 - `lint-staged` (used as a `precommit` hook to automatically reformat changed
   source files)
+
+- `ttypescript` (allows transform plugins to be loaded from `tsconfig.json`)
 
 ## Usage: Prettier
 
@@ -49,6 +53,15 @@ coverage/
 package.json
 ```
 
+If you would like to rewrite `../` style paths in imports to use `~/` then use
+the following `.huskyrc.js`
+
+```json
+{
+  "precommit": "yarn rewrite-imports --dir . && lint-staged"
+}
+```
+
 ## Usage: Jest
 
 Create `jest.config.js` at root of your project that contains:
@@ -69,9 +82,24 @@ module.exports = {
 };
 ```
 
+## Usage: Babel
+
+Babel is used to convert `*.ts` files to `*.js` by stripping away type
+information. It is used when running `jest` tests and it can also be used to
+build files for the web, docker image, serverless function, etc. (when type
+declaration files are not needed)
+
+Create `babel.config.js` at root of your project that contains:
+
+```javascript
+module.exports = require('@jupiterone/typescript-tools/config/babel');
+```
+
 ## Usage: TypeScript
 
 Create `tsconfig.json` at root of your project that contains:
+
+For
 
 ```json
 {
@@ -120,7 +148,7 @@ The current eslint configuration extends the following:
   Disables rules that `prettier` will automatically fix.
 
 After extending the configurations above, the following rule overrides are
-provided by `@lifeomic/typescript-tools`:
+provided by `@jupiterone/typescript-tools`:
 
 - `@typescript-eslint/explicit-function-return-type": "off"`
 - `@typescript-eslint/no-explicit-any": "off"`
@@ -202,36 +230,4 @@ Create `.eslintrc` at root of your project that contains:
     "./node_modules/@jupiterone/typescript-tools/config/eslint-react.json"
   ]
 }
-```
-
-## Usage: Publishing Node.js Package
-
-If your build output will be published as an NPM package, the following
-`tsconfig.json` is recommended:
-
-```plain
-{
-  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": ".",
-    "module": "CommonJS"
-  },
-  "include": ["src/**/*"]
-}
-```
-
-The following `.npmignore` file is recommended:
-
-```plain
-*.test.js
-*.test.d.ts
-```
-
-Your project's `Jenkinsfile` should contain the following command in the
-`publish` stage:
-
-```bash
-./node_modules/@jupiterone/dev-tools/bin/lifeomic-publish-npm-package --directory ./dist --publish-tagged-commits-only
 ```

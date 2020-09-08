@@ -9,11 +9,21 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "allowJs": true,
+    "module": "CommonJS",
     "moduleResolution": "node",
     "target": "ES2019",
-    "lib": ["ES2019"],
     "pretty": true,
     "inlineSourceMap": true,
-    "inlineSources": true
+    "inlineSources": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths",
+        "exclude": ["*"]
+      }
+    ]
   }
 }
