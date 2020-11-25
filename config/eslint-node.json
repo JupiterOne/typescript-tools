@@ -1,6 +1,0 @@
-{
-  "extends": ["./eslint-base.json"],
-  "env": {
-    "node": true
-  }
-}
