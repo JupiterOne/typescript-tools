@@ -1087,10 +1087,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@jupiterone/eslint-config@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@jupiterone/eslint-config/-/eslint-config-1.0.1.tgz#b443587094212f3992bea7d96a150cb274236dcf"
-  integrity sha512-fhUbHK/BJmNhYQOaeOyrCtYnoWAJZMrA2q+BW9IJ7oI6AxuEE+fQhoDGHuSqOY9kn7wnbxAyTEB6bAGgyEt/IQ==
+"@jupiterone/eslint-config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@jupiterone/eslint-config/-/eslint-config-1.0.2.tgz#4582dd9d76a8fac9ec061a31cf3cd21d29b50444"
+  integrity sha512-eptGUM63t+EKWedpoRzFfmQZB33TV0HyRDJ7tXgq8AchpaJBQjeycAscjlItaLQrPtgKztPLj/PPqW7zirBu0Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.8.2"
     "@typescript-eslint/parser" "^4.8.2"
@@ -1135,10 +1135,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@philidem/rewrite-relative-paths@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@philidem/rewrite-relative-paths/-/rewrite-relative-paths-1.0.6.tgz#e31cb20b7b57fbd39c3c0d322f4423e9c34368e5"
-  integrity sha512-YQRF2KIZci2pfpoPsriTg4EKDS08J+g3Ue3cHgXcNyqP4S4VB/LmqRJJOtiaA4YK+85uriaYcO2RLLb8pd/xGw==
+"@philidem/rewrite-relative-paths@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@philidem/rewrite-relative-paths/-/rewrite-relative-paths-1.1.0.tgz#8d8af49deefc3a4ca0869fddf02d5fd3e911751d"
+  integrity sha512-1aK7C6Ee/7LAsmNgK3Yv5llxmzPIt6OTSV+vdVSyMtTgXf8MzAHEAwKgqsgP5yTLKT8pHzy3VjUjF51LAkS3ag==
   dependencies:
     chalk "^4.1.0"
     ignore "^5.1.8"
