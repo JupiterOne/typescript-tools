@@ -1,4 +1,21 @@
-# Upgrading
+# CHANGELOG
+
+## v13.0.0
+
+`eslint` configuration was moved to `@jupiterone/eslint-config` module.
+
+Modify your project's `.eslintrc` to contain:
+
+```json
+{
+  "root": true,
+  "extends": ["@jupiterone/eslint-config/node"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  }
+}
+```
 
 ## v12.0.0
 

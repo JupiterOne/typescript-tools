@@ -99,8 +99,6 @@ module.exports = require('@jupiterone/typescript-tools/config/babel');
 
 Create `tsconfig.json` at root of your project that contains:
 
-For
-
 ```json
 {
   "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript",
@@ -196,9 +194,7 @@ Create `.eslintrc` at root of your project that contains:
 ```json
 {
   "root": true,
-  "extends": [
-    "./node_modules/@jupiterone/typescript-tools/config/eslint-node.json"
-  ],
+  "extends": ["@jupiterone/eslint-config/node"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "tsconfigRootDir": "."

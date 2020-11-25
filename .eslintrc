@@ -1,6 +1,6 @@
 {
   "root": true,
   "extends": [
-    "./config/eslint-node.json"
+    "@jupiterone/eslint-config/node"
   ]
 }
