@@ -1,0 +1,23 @@
+{
+  "extends": "./typescript-node12",
+  "compilerOptions": {
+    "declaration": true,
+    "composite": true,
+    "incremental": true
+  },
+  "include": [
+    "*.js",
+    "*.ts",
+    "packages/*/*.js",
+    "packages/*/*.ts",
+    "packages/*/package.json",
+    "packages/*/*/**/*.ts",
+    "packages/*/*/**/*.json"
+  ],
+  "exclude": [
+    "packages/*/dist/**/*",
+    "packages/*/coverage/**/*",
+    "**/bak/**/*",
+    "**/*.bak/**/*"
+  ]
+}
