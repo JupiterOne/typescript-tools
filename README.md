@@ -3,7 +3,7 @@
 This Node.js package provides a baseline set of dependencies, configuration, and
 scripts that can be used by other TypeScript projects.
 
-This Node.js package is opinionated and comes bundles with the following
+This Node.js package is opinionated and comes bundled with the following
 dependencies:
 
 - `typescript`
@@ -38,16 +38,31 @@ This package provides the following `bin` entries:
 - `yalc-check`: Checks `package.json` files to make sure there are no `.yalc`
   entries Run `yarn yalc-check --help` for more information.
 
-It is recommended that you add the following helper scripts to projects using
-`@jupiterone/typescript-tools`:
+It is recommended that you add helper scripts to projects using
+`@jupiterone/typescript-tools`.
 
-```js
+**For monorepo projects:**
+
+```json
 {
   "scripts": {
     "tsconfig:repair": "check-tsconfig --monorepo --repair",
     "tsconfig:check": "check-tsconfig --monorepo --no-repair",
     "yalc:publish": "yalc-publish --monorepo",
-    "yalc:check": "yalc check"
+    "yalc:check": "yalc-check --monorepo"
+  }
+}
+```
+
+**For non-monorepo projects:**
+
+```json
+{
+  "scripts": {
+    "tsconfig:repair": "check-tsconfig --repair",
+    "tsconfig:check": "check-tsconfig --no-repair",
+    "yalc:publish": "yalc-publish",
+    "yalc:check": "yalc-check"
   }
 }
 ```
@@ -100,13 +115,31 @@ coverage/
 package.json
 ```
 
-If you would like to rewrite `../` style paths in imports to use `~/` then use
-the following `.huskyrc.js`
+If you would like to rewrite `../` style paths in imports to use `~/` then you
+should modify your project's `lint-staged.config.js` file.
 
-```json
-{
-  "precommit": "yarn rewrite-imports --dir . && lint-staged"
-}
+**For monorepo:**
+
+```js
+// For monorepo
+module.exports = {
+  '*.{ts,tsx,js,jsx,json,css,md}': [
+    'prettier --write',
+    'yarn rewrite-imports --monorepo --dir .',
+  ],
+};
+```
+
+**For non-monorepo project:**
+
+```js
+// For monorepo
+module.exports = {
+  '*.{ts,tsx,js,jsx,json,css,md}': [
+    'prettier --write',
+    'yarn rewrite-imports --dir .',
+  ],
+};
 ```
 
 ## Usage: Jest
@@ -140,6 +173,25 @@ Create `babel.config.js` at root of your project that contains:
 
 ```javascript
 module.exports = require('@jupiterone/typescript-tools/config/babel');
+```
+
+For monorepo projects use the following in your root `babel.config.js` file:
+
+```javascript
+const {
+  buildBabelConfig,
+} = require('@jupiterone/typescript-tools/config/babel-util');
+module.exports = buildBabelConfig({ monorepo: true });
+```
+
+In each of the monorepo packages, use the following in each of your
+`packages/*/.babelrc.js` files:
+
+```javascript
+const {
+  buildBabelConfig,
+} = require('@jupiterone/typescript-tools/config/babel-util');
+module.exports = buildBabelConfig({ packageDir: __dirname });
 ```
 
 ## Usage: TypeScript
