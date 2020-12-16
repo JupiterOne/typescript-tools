@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "13.1.1",
+  "version": "13.1.2",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/jupiterone/typescript-tools",
   "author": "Development <development@jupiterone.com>",

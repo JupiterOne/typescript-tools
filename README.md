@@ -77,13 +77,34 @@ yarn check-tsconfig --monorepo
 # Publish packages in your monorepo locally using yalc:
 yalc-publish --monorepo
 
-# Make sure package.json does not contain local .yalc dependencies:
-yalc check
+# Make sure package.json files do not contain local .yalc dependencies:
+yalc-check --monorepo
 ```
 
 For more information about `yalc`, visit:
 
 <https://github.com/whitecolor/yalc>
+
+### Compiling project
+
+**For monorepo:**
+
+```sh
+# Update all project references so that they match interproject dependencies:
+yarn check-tsconfig --monorepo --repair
+
+# Now compile all packages using project references which allows the
+# typescript compiler to compile your packages in the correct order
+yarn ttsc -b `find ./packages -maxdepth 2 -name tsconfig.dist.json`
+```
+
+**For non-monorepo:**
+
+```sh
+# It is recommended to have a tsconfig.dist.json that excludes all test files
+# and use that to compile your typescript files
+yarn ttsc --declaration -p tsconfig.dist.json
+```
 
 ## Usage: Prettier
 
@@ -144,11 +165,42 @@ module.exports = {
 
 ## Usage: Jest
 
-Create `jest.config.js` at root of your project that contains:
+Create `jest.config.js` at root of your project and use the contents below.
+
+**For monorepo:**
+
+```javascript
+module.exports = {
+  ...require('@jupiterone/typescript-tools/config/jest-monorepo'),
+
+  // Optionally, run some setup script before each test script
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+
+  collectCoverageFrom: [
+    'packages/*/src/**/*.ts',
+    '!**/*.test.ts',
+    '!**/__tests__/**',
+  ],
+  coverageThreshold: {
+    global: {
+      statements: 100,
+      branches: 100,
+      functions: 100,
+      lines: 100,
+    },
+  },
+};
+```
+
+**For non-monorepo:**
 
 ```javascript
 module.exports = {
   ...require('@jupiterone/typescript-tools/config/jest'),
+
+  // Optionally, run some setup script before each test script
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.ts'],
   coverageThreshold: {
@@ -175,7 +227,7 @@ Create `babel.config.js` at root of your project that contains:
 module.exports = require('@jupiterone/typescript-tools/config/babel');
 ```
 
-For monorepo projects use the following in your root `babel.config.js` file:
+**For monorepo projects use the following in your root `babel.config.js` file:**
 
 ```javascript
 const {
@@ -184,8 +236,8 @@ const {
 module.exports = buildBabelConfig({ monorepo: true });
 ```
 
-In each of the monorepo packages, use the following in each of your
-`packages/*/.babelrc.js` files:
+**In each of the monorepo packages, use the following in each of your
+`packages/*/.babelrc.js` files:**
 
 ```javascript
 const {
@@ -196,15 +248,91 @@ module.exports = buildBabelConfig({ packageDir: __dirname });
 
 ## Usage: TypeScript
 
-Create `tsconfig.json` at root of your project that contains:
+Create `tsconfig.json` at root of your project that contains the contents below.
+
+**For monorepo:**
 
 ```json
 {
-  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript",
+  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node12-monorepo",
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": "."
+    "outDir": "dist"
   }
+}
+```
+
+Also, for every monorepo package use this in its `./packages/*/tsconfig.json`
+file:
+
+```json
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": "."
+  },
+  "include": ["package.json", "**/*.ts", "**/*.json"],
+  "exclude": ["dist/**/*", "coverage/**/*", "**/bak/**/*", "**/*.bak/**/*"]
+}
+```
+
+Also, for every monorepo package use this in its
+`./packages/*/tsconfig.dist.json` file:
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "dist/**/*",
+    "coverage/**/*",
+    "**/bak/**/*",
+    "**/*.bak/**/*",
+    "test/**",
+    "**/*.test.ts",
+    "**/__tests__/**/*.ts",
+    "**/__mocks__/**/*.ts"
+  ],
+  "references": [
+    ...
+  ]
+}
+```
+
+**For non-monorepo:**
+
+Add this to `tsconfig.json` file at root of project:
+
+```json
+{
+  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node12",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*.ts",
+    "tools/**/*.ts",
+    "tools/*.js",
+    "test/**/*.ts",
+    "jest.*.ts",
+    "jest.*.js",
+    "*.config.js"
+  ],
+  "exclude": ["**/*.bak/**/*", "**/dist/**/*"]
+}
+```
+
+Also, for _production_ builds use a `tsconfig.dist.json` file that excludes
+tests:
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.test.ts"]
 }
 ```
 
@@ -212,8 +340,11 @@ Create `tsconfig.json` at root of your project that contains:
 need to be relative to your `tsconfig.json` file and not the TypeScript
 configuration file that we are extending.
 
-**NOTE:** TypeScript doesn't use Node module resolution so we have to use a
-relative or absolute path. See
+**NOTE:** You may want to add `"skipLibCheck": true` to the `compilerOptions` if
+you have installed third-party packages that have broken types.
+
+**NOTE:** TypeScript doesn't use Node module resolution to find tsconfig.json
+files for extending so we have to use a relative or absolute path. See
 <https://github.com/Microsoft/TypeScript/issues/18865>
 
 **To perform type-checking:**
