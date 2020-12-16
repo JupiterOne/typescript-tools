@@ -1,0 +1,10 @@
+{
+  "extends": "./config/typescript-node12",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "skipLibCheck": true
+  },
+  "include": ["bin/**/*.ts", "src/**/*.ts"]
+}
