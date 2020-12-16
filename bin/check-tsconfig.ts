@@ -191,24 +191,21 @@ async function checkMonorepo() {
     }
 
     const requiredDependencies = [...requiredDependenciesSet];
-    if (!requiredDependencies.length) {
+    if (requiredDependencies.length) {
+      log(
+        `  It depends on:\n${requiredDependencies
+          .map((dep) => {
+            return `    - ${dep}\n`;
+          })
+          .join('')}`
+      );
+    } else {
       log(
         chalk.gray(
-          `  ${chalk.bold(
-            packageInfo.packageName
-          )} has no dependencies (skipping)`
+          `  ${chalk.bold(packageInfo.packageName)} has no dependencies`
         )
       );
-      continue;
     }
-
-    log(
-      `  It depends on:\n${requiredDependencies
-        .map((dep) => {
-          return `    - ${dep}\n`;
-        })
-        .join('')}`
-    );
 
     const expected = new Set<string>(
       requiredDependencies.map((dep) => {
