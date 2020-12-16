@@ -23,6 +23,53 @@ dependencies:
 
 - `ttypescript` (allows transform plugins to be loaded from `tsconfig.json`)
 
+## Helper Scripts
+
+This package provides the following `bin` entries:
+
+- `check-tsconfig`: Fix and, optionally, repair
+  [project references](https://www.typescriptlang.org/docs/handbook/project-references.html)
+  in `tsconfig.dist.json` files. Run `yarn check-tsconfig --help` for more
+  information.
+
+- `yalc-publish`: Use `yalc` to publish packages locally (better alternative to
+  `yarn link`) Run `yarn yalc-publish --help` for more information.
+
+- `yalc-check`: Checks `package.json` files to make sure there are no `.yalc`
+  entries Run `yarn yalc-check --help` for more information.
+
+It is recommended that you add the following helper scripts to projects using
+`@jupiterone/typescript-tools`:
+
+```js
+{
+  "scripts": {
+    "tsconfig:repair": "check-tsconfig --monorepo --repair",
+    "tsconfig:check": "check-tsconfig --monorepo --no-repair",
+    "yalc:publish": "yalc-publish --monorepo",
+    "yalc:check": "yalc check"
+  }
+}
+```
+
+```sh
+# Repair project references inside packages/*/tsconfig.dist.json files:
+yarn check-tsconfig --monorepo --repair
+
+# Check project references inside packages/*/tsconfig.dist.json files:
+yarn check-tsconfig --monorepo
+
+# Publish packages in your monorepo locally using yalc:
+yalc-publish --monorepo
+
+# Make sure package.json does not contain local .yalc dependencies:
+yalc check
+```
+
+For more information about `yalc`, visit:
+
+<https://github.com/whitecolor/yalc>
+
 ## Usage: Prettier
 
 Create `prettier.config.js` at root of your project that contains:

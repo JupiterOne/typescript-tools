@@ -10,10 +10,19 @@
   },
   "scripts": {
     "format-code": "prettier --write '**/*.{js,ts,md,json}'",
-    "lint": "eslint --ext .ts,.tsx,.js,.jsx ."
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
+    "compile": "yarn ttsc --declaration -p tsconfig.json",
+    "clean": "rm -rf ./dist",
+    "build": "yarn clean && yarn compile",
+    "yalc:publish": "yarn build && node ./dist/bin/yalc-publish $@",
+    "yalc:check": "node ./dist/bin/yalc-check $@",
+    "tsconfig:repair": "node ./dist/bin/check-tsconfig --repair",
+    "tsconfig:check": "node ./dist/bin/check-tsconfig --no-repair"
   },
   "bin": {
-    "type-check": "./bin/type-check"
+    "check-tsconfig": "./dist/bin/check-tsconfig.js",
+    "yalc-publish": "./dist/bin/yalc-publish.js",
+    "yalc-check": "./dist/bin/yalc-check.js"
   },
   "dependencies": {
     "@babel/cli": "^7.11.6",
@@ -32,13 +41,15 @@
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
     "ttypescript": "^1.5.11",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "yalc": "^1.0.0-pre.48",
+    "yargs": "^16.2.0"
   },
   "files": [
     "LICENSE",
     "*.md",
+    "index.js",
     "config/**/*",
-    "src/**/*",
-    "bin/**/*"
+    "dist/**/*"
   ]
 }

@@ -2,5 +2,14 @@
   "root": true,
   "extends": [
     "@jupiterone/eslint-config/node"
-  ]
+  ],
+  "ignorePatterns": [
+    "*.js",
+    "index.js",
+    "config/"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  }
 }
