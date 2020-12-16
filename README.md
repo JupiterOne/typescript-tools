@@ -258,7 +258,22 @@ Create `tsconfig.json` at root of your project that contains the contents below.
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist"
-  }
+  },
+  "include": [
+    "*.js",
+    "*.ts",
+    "packages/*/*.js",
+    "packages/*/*.ts",
+    "packages/*/package.json",
+    "packages/*/*/**/*.ts",
+    "packages/*/*/**/*.json"
+  ],
+  "exclude": [
+    "packages/*/dist/**/*",
+    "packages/*/coverage/**/*",
+    "**/bak/**/*",
+    "**/*.bak/**/*"
+  ]
 }
 ```
 
