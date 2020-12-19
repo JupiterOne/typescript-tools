@@ -45,7 +45,7 @@ function log(msg: string) {
   console.log(msg);
 }
 
-async function readJsonFile(file: string) {
+async function readJsonFile<T>(file: string): Promise<T | undefined> {
   let contents: string;
   try {
     contents = await fs.readFile(file, { encoding: 'utf8' });
@@ -93,11 +93,106 @@ type PackageInfo = {
   packageObj: PackageManifest;
 };
 
+type CheckTSConfigStats = {
+  problemFileCount: number;
+};
+
+async function checkTsConfigFile(options: {
+  packageInfo: PackageInfo;
+  stats: CheckTSConfigStats;
+  tsconfigFile: string;
+  tsconfigObj: TSConfig;
+  expectedProjectReferences: Set<string>;
+}) {
+  const { packageInfo, stats, tsconfigFile, tsconfigObj } = options;
+  const expected = options.expectedProjectReferences;
+  const unexpected = new Set<string>();
+  const missing = new Set<string>(expected);
+
+  for (const ref of tsconfigObj.references ?? []) {
+    if (ref.path) {
+      if (expected.has(ref.path)) {
+        log(chalk.gray(`  ✓ Already has ${ref.path}`));
+        missing.delete(ref.path);
+      } else {
+        unexpected.add(ref.path);
+      }
+    }
+  }
+
+  if (unexpected.size) {
+    log(
+      chalk.yellow(
+        `  ${chalk.bold(
+          packageInfo.packageName
+        )} has unexpected project references:\n${[...unexpected]
+          .map((dep) => {
+            return `    - ${JSON.stringify(dep)}\n`;
+          })
+          .join('')}`
+      )
+    );
+  }
+
+  if (missing.size) {
+    log(
+      chalk.yellow(
+        `  ${chalk.bold(
+          packageInfo.packageName
+        )} is missing these project project references:\n${[...missing]
+          .map((dep) => {
+            return `    - ${JSON.stringify(dep)}\n`;
+          })
+          .join('')}`
+      )
+    );
+  }
+
+  if (!unexpected.size && !missing.size) {
+    log(
+      chalk.gray(
+        `\n  ${chalk.bold.green('✓')} ${chalk.bold(
+          packageInfo.packageName
+        )} is good`
+      )
+    );
+    return;
+  }
+
+  stats.problemFileCount++;
+
+  if (isRepairEnabled) {
+    const repairedReferences = [...expected].map((refPath) => {
+      return {
+        path: refPath,
+      };
+    });
+
+    await fs.writeFile(
+      tsconfigFile,
+      JSON.stringify(
+        {
+          ...tsconfigObj,
+          references: repairedReferences,
+        },
+        null,
+        2
+      ),
+      { encoding: 'utf8' }
+    );
+
+    log(chalk.green(`  ${chalk.bold(packageInfo.packageName)} was repaired!`));
+  }
+}
+
 async function checkMonorepo() {
   const packagesDir = path.join(process.cwd(), 'packages');
   const packages: PackageInfo[] = [];
 
   const knownPackages: Record<string, PackageInfo> = {};
+  const stats: CheckTSConfigStats = {
+    problemFileCount: 0,
+  };
 
   let packagesReadDirResult;
 
@@ -123,7 +218,7 @@ async function checkMonorepo() {
     }
 
     const packageFile = path.join(packageDir, 'package.json');
-    const packageObj: PackageManifest = await readJsonFile(packageFile);
+    const packageObj = await readJsonFile<PackageManifest>(packageFile);
     if (!packageObj) {
       continue;
     }
@@ -162,13 +257,21 @@ async function checkMonorepo() {
     packages.push(packageInfo);
   }
 
-  let problemFileCount = 0;
-
   for (const packageInfo of packages) {
     log(`\nChecking ${chalk.bold(packageInfo.dirName)}...`);
-    const tsconfigFile = path.join(packageInfo.dir, 'tsconfig.dist.json');
-    const tsconfigObj: TSConfig = await readJsonFile(tsconfigFile);
-    if (!tsconfigObj) {
+
+    const tsconfigDistFile = path.join(packageInfo.dir, 'tsconfig.dist.json');
+    const tsconfigDistObj = await readJsonFile<TSConfig>(tsconfigDistFile);
+
+    const tsconfigFile = path.join(packageInfo.dir, 'tsconfig.json');
+    const tsconfigObj = await readJsonFile<TSConfig>(tsconfigFile);
+
+    if (!tsconfigObj && !tsconfigDistObj) {
+      console.log(
+        `Package ${chalk.bold(
+          packageInfo.dirName
+        )} does not have tsconfig.json or tsconfig.dist.json (skipping)`
+      );
       continue;
     }
 
@@ -214,84 +317,24 @@ async function checkMonorepo() {
       })
     );
 
-    const unexpected = new Set<string>();
-    const missing = new Set<string>(expected);
-
-    for (const ref of tsconfigObj.references ?? []) {
-      if (ref.path) {
-        if (expected.has(ref.path)) {
-          log(chalk.gray(`  ✓ Already has ${ref.path}`));
-          missing.delete(ref.path);
-        } else {
-          unexpected.add(ref.path);
-        }
-      }
-    }
-
-    if (unexpected.size) {
-      log(
-        chalk.yellow(
-          `  ${chalk.bold(
-            packageInfo.packageName
-          )} has unexpected project references:\n${[...unexpected]
-            .map((dep) => {
-              return `    - ${JSON.stringify(dep)}\n`;
-            })
-            .join('')}`
-        )
-      );
-    }
-
-    if (missing.size) {
-      log(
-        chalk.yellow(
-          `  ${chalk.bold(
-            packageInfo.packageName
-          )} is missing these project project references:\n${[...missing]
-            .map((dep) => {
-              return `    - ${JSON.stringify(dep)}\n`;
-            })
-            .join('')}`
-        )
-      );
-    }
-
-    if (!unexpected.size && !missing.size) {
-      log(
-        chalk.gray(
-          `\n  ${chalk.bold.green('✓')} ${chalk.bold(
-            packageInfo.packageName
-          )} is good`
-        )
-      );
-      continue;
-    }
-
-    problemFileCount++;
-
-    if (isRepairEnabled) {
-      const repairedReferences = [...expected].map((refPath) => {
-        return {
-          path: refPath,
-        };
-      });
-
-      await fs.writeFile(
+    if (tsconfigObj) {
+      await checkTsConfigFile({
+        expectedProjectReferences: expected,
+        packageInfo,
+        stats,
         tsconfigFile,
-        JSON.stringify(
-          {
-            ...tsconfigObj,
-            references: repairedReferences,
-          },
-          null,
-          2
-        ),
-        { encoding: 'utf8' }
-      );
+        tsconfigObj,
+      });
+    }
 
-      log(
-        chalk.green(`  ${chalk.bold(packageInfo.packageName)} was repaired!`)
-      );
+    if (tsconfigDistObj) {
+      await checkTsConfigFile({
+        expectedProjectReferences: expected,
+        packageInfo,
+        stats,
+        tsconfigFile: tsconfigDistFile,
+        tsconfigObj: tsconfigDistObj,
+      });
     }
   }
 
@@ -300,12 +343,12 @@ async function checkMonorepo() {
   );
 
   if (isRepairEnabled) {
-    console.log(`  Number of files repaired: ${problemFileCount}\n`);
+    console.log(`  Number of files repaired: ${stats.problemFileCount}\n`);
   } else {
-    console.log(`  Number of files with problems: ${problemFileCount}\n`);
+    console.log(`  Number of files with problems: ${stats.problemFileCount}\n`);
   }
 
-  if (problemFileCount && !isRepairEnabled) {
+  if (stats.problemFileCount && !isRepairEnabled) {
     console.error(
       chalk.bold.red(`Problems were found in tsconfig files (please review).\n`)
     );
