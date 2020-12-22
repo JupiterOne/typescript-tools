@@ -139,6 +139,11 @@ package.json
 If you would like to rewrite `../` style paths in imports to use `~/` then you
 should modify your project's `lint-staged.config.js` file.
 
+**NOTE:** This project also installs
+[prettier-plugin-organize-imports](https://github.com/simonhaenisch/prettier-plugin-organize-imports)
+which will automatically be loaded by `prettier` and it will be used to organize
+imports.
+
 **For monorepo:**
 
 ```js

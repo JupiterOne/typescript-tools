@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "13.1.6",
+  "version": "13.2.0",
   "main": "./src/index.js",
   "repository": "https://bitbucket.org/jupiterone/typescript-tools",
   "author": "Development <development@jupiterone.com>",
@@ -40,6 +40,7 @@
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
+    "prettier-plugin-organize-imports": "^1.1.1",
     "ttypescript": "^1.5.11",
     "typescript": "^4.1.2",
     "yalc": "^1.0.0-pre.48",
