@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "main": "./index.js",
   "repository": "https://github.com/jupiterone/typescript-tools",
   "author": "Development <development@jupiterone.com>",
