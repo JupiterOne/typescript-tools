@@ -1,8 +1,8 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "main": "./index.js",
-  "repository": "https://bitbucket.org/jupiterone/typescript-tools",
+  "repository": "https://github.com/jupiterone/typescript-tools",
   "author": "Development <development@jupiterone.com>",
   "license": "UNLICENSED",
   "publishConfig": {
