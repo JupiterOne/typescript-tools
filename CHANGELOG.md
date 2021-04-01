@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 14.0.2 - 2021-03-25
+
+### Changed
+
+- Remove the `collectCoverageFrom` in `jest-monorepo.js` to avoid potential
+  conflicts with package-level code coverage settings.
+
 ## 14.0.1 - 2021-03-24
 
 ### Changed
