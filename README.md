@@ -444,7 +444,7 @@ Create `.eslintrc` at root of your project that contains:
 ```json
 {
   "root": true,
-  "extends": ["@jupiterone/eslint-config/node"],
+  "extends": ["@jupiterone/eslint-config"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "tsconfigRootDir": "."
@@ -473,7 +473,7 @@ Create `.eslintrc` at root of your project that contains:
 {
   "root": true,
   "extends": [
-    "./node_modules/@jupiterone/typescript-tools/config/eslint-react.json"
+    "@jupiterone/eslint-config/react"
   ]
 }
 ```
