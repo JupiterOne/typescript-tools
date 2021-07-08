@@ -25,18 +25,27 @@ const input = yargs
   .option('monorepo', {
     type: 'boolean',
     description: 'Is this a monorepo? If so, packages will be checked',
+  })
+  .option('sharedPackageName', {
+    type: 'string',
+    description:
+      'Is there a shared package that is used by other local monorepo packages?  *Only used for monorepo packages',
   }).argv as {
   help?: boolean;
   husky?: boolean;
   quiet?: boolean;
   repair?: boolean;
   monorepo?: boolean;
+  sharedPackageName: string;
   _: string[];
 };
 
 const isQuiet = input.quiet === true;
 const isRepairEnabled = input.repair === true;
 const isMonorepo = input.monorepo === true;
+
+const hasSharedPackage =
+  isMonorepo && input.sharedPackageName && input.sharedPackageName !== '';
 
 function log(msg: string) {
   if (isQuiet) {
@@ -276,6 +285,9 @@ async function checkMonorepo() {
     }
 
     const requiredDependenciesSet = new Set<string>();
+    if (hasSharedPackage) {
+      requiredDependenciesSet.add(input.sharedPackageName);
+    }
 
     const processDependencies = (dependencyNames: string[]) => {
       for (const dependencyName of dependencyNames) {
