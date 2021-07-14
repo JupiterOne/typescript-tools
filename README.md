@@ -16,7 +16,7 @@ dependencies:
 
 - `eslint`
 
-- `husky` (allows you specify git hook scripts inside `.husky` -
+- `husky` (allows you specify git hook scripts inside `.husky/` directory -
   [read more](#usage-husky-7))
 
 - `commmitlint` (optionally require conventional commits -
