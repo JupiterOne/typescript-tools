@@ -27,6 +27,13 @@ dependencies:
 
 - `ttypescript` (allows transform plugins to be loaded from `tsconfig.json`)
 
+## Migrating from Husky 4 to Husky 7:
+
+If you've been using previous versions of Husky in your project, the newest
+version of Husky requires some package maintenance to keep git hooks working
+(and working better than previously):
+[read more](#installation-/-upgrade-for-previous-projects)
+
 ## Helper Scripts
 
 This package provides the following `bin` entries:
@@ -501,6 +508,14 @@ Summarized major changes for our use-case are as follows:
 
 - <b>[Instructions to migrate](https://github.com/typicode/husky-4-to-7) from v4
   to v7 automatically</b>
+
+  From the above link:
+
+  ```bash
+  yarn add husky@latest --dev \
+  && npx husky-init \
+  && npm exec -- github:typicode/husky-4-to-7 --remove-v4-config
+  ```
 
 The above instructions basically just remove the `.git/hooks` entries, creates a
 `.husky` directory, and executes
