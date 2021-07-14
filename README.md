@@ -524,6 +524,25 @@ previous format -- you are free to set up the hooks each on their own, but the
 aforementioned script will attempt to convert the old format to the Husky 7.x
 format.
 
+### Recommended Hooks
+
+Standard set of Jupiter One hooks are configured as follows, after installing
+Husky:
+
+```bash
+npx husky add .husky/pre-commit 'yarn lint-staged && yarn format'
+npx husky add .husky/pre-push 'yarn test:ci'
+```
+
+and if following `Conventional Commits` (with a
+[commitlint config](#usage-commitlint)):
+
+```bash
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+
+The above pattern can be used to add hooks for any of the supported git-hooks.
+
 ## Usage: Commitlint
 
 [Commitlint](https://github.com/conventional-changelog/commitlint) is a package
@@ -534,3 +553,11 @@ It's entirely optional to enable on a package currently-- to do so, just place a
 independently, or import a common config from this repository. For convenience a
 `lerna-monorepo` style commitlint.config.js is exported from the config
 directory.
+
+Example configuration for a Lerna-maintained monorepo with Conventional Commits:
+
+```javascript
+module.exports = {
+  extends: ['@jupiterone/typescript-tools/config/commitlint-monorepo'],
+};
+```
