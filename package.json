@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "14.0.2",
+  "version": "14.1.0",
   "main": "./index.js",
   "repository": "https://github.com/jupiterone/typescript-tools",
   "author": "Development <development@jupiterone.com>",
@@ -17,7 +17,8 @@
     "yalc:publish": "yarn build && node ./dist/bin/yalc-publish $@",
     "yalc:check": "node ./dist/bin/yalc-check $@",
     "tsconfig:repair": "node ./dist/bin/check-tsconfig --repair",
-    "tsconfig:check": "node ./dist/bin/check-tsconfig --no-repair"
+    "tsconfig:check": "node ./dist/bin/check-tsconfig --no-repair",
+    "prepare": "husky install"
   },
   "bin": {
     "check-tsconfig": "./dist/bin/check-tsconfig.js",
@@ -29,6 +30,8 @@
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-lerna-scopes": "^12.1.4",
     "@jupiterone/eslint-config": "^1.0.2",
     "@philidem/rewrite-relative-paths": "^1.1.0",
     "@types/jest": "^26.0.13",
@@ -36,7 +39,7 @@
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7.14.0",
-    "husky": "^4.2.5",
+    "husky": "^7.0.1",
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",

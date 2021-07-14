@@ -16,7 +16,11 @@ dependencies:
 
 - `eslint`
 
-- `husky` (allows you specify git hook scripts in your `package.json`)
+- `husky` (allows you specify git hook scripts inside `.husky` -
+  [read more](#usage-husky-7))
+
+- `commmitlint` (optionally require conventional commits -
+  [read more](#usage-commitlint))
 
 - `lint-staged` (used as a `precommit` hook to automatically reformat changed
   source files)
@@ -118,12 +122,6 @@ Create `lint-staged.config.js` at root of your project that contains:
 
 ```javascript
 module.exports = require('@jupiterone/typescript-tools/config/lint-staged');
-```
-
-Create `.huskyrc.js` at root of your project that contains:
-
-```javascript
-module.exports = require('@jupiterone/typescript-tools/config/husky');
 ```
 
 Also, the following `.prettierignore` file is recommended:
@@ -472,8 +470,52 @@ Create `.eslintrc` at root of your project that contains:
 ```json
 {
   "root": true,
-  "extends": [
-    "@jupiterone/eslint-config/react"
-  ]
+  "extends": ["@jupiterone/eslint-config/react"]
 }
 ```
+
+## Usage: Husky 7
+
+In the updates to Husky for major version 7 they have included some large
+changes that fix existing Husky problems. (Most of these problems revolved
+around failing to properly bootstrap a new cloned project with `.git/hooks`
+entries and the inability to run hooks without first loading the `node.js`
+runtime [due to looking in many different places for a JS config that must be
+added to the `.git/hooks` directory])
+
+A writeup by the Husky authors
+[can be read here](https://blog.typicode.com/husky-git-hooks-javascript-config/).
+Summarized major changes for our use-case are as follows:
+
+- No more `.huskyrc` and no more `[package.json].husky` entries. (Husky is
+  configuring Git with shell scripts now, we don't want JS configs)
+
+- Hooks now live in a directory specified by `git config` at the
+  `core.hooksPath` directory
+
+  - Husky will try to set the above path automatically on `prepare`
+
+- Maintenance needed to upgrade existing hooks to the new format:
+
+### Installation / Upgrade for Previous Projects
+
+- <b>[Instructions to migrate](https://github.com/typicode/husky-4-to-7) from v4
+  to v7 automatically</b>
+
+The above instructions basically just remove the `.git/hooks` entries, creates a
+`.husky` directory, and executes
+`npx husky add .husky/<my-hook> '<My Hook Contents>` for each hook in the
+previous format -- you are free to set up the hooks each on their own, but the
+aforementioned script will attempt to convert the old format to the Husky 7.x
+format.
+
+## Usage: Commitlint
+
+[Commitlint](https://github.com/conventional-changelog/commitlint) is a package
+to enforce that users execute git commits with their messages complying to the
+[conventional commit standard](https://www.conventionalcommits.org/en/v1.0.0/).
+It's entirely optional to enable on a package currently-- to do so, just place a
+`commitlint.config.js` file at your project root, and either configure
+independently, or import a common config from this repository. For convenience a
+`lerna-monorepo` style commitlint.config.js is exported from the config
+directory.
