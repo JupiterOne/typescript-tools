@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 15.0.0 - 2021-07-14
+
+### Changed
+
+- Upgraded to `husky@7`, see [README.md](./README.md#migrating-from-husky-4-to-husky-7) for
+  migration instructions.
+
 ## 14.0.2 - 2021-03-25
 
 ### Changed
