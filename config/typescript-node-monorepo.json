@@ -1,5 +1,5 @@
 {
-  "extends": "./typescript-node12",
+  "extends": "./typescript-node",
   "compilerOptions": {
     "declaration": true,
     "composite": true,

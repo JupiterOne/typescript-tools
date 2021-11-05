@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Babel now targeting Node.js 14
+- Renaming configuration files to remove specific Node.js version
+  - `config/typescript-node12.json` -> `config/typescript-node.json`
+  - `config/typescript-node-monorepo12.json` -> `config/typescript-node-monorepo.json`
+
 ## 15.0.0 - 2021-07-14
 
 ### Changed

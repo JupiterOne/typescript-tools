@@ -1,5 +1,5 @@
 {
-  "extends": "./config/typescript-node12",
+  "extends": "./config/typescript-node",
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",
