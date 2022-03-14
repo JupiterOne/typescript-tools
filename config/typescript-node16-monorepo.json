@@ -1,0 +1,8 @@
+{
+  "extends": "./typescript-node16",
+  "compilerOptions": {
+    "declaration": true,
+    "composite": true,
+    "incremental": true
+  }
+}
