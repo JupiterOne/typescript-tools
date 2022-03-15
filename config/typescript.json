@@ -21,8 +21,8 @@
     },
     "plugins": [
       {
-        "name": "@zerollup/ts-transform-paths",
-        "transform": "@zerollup/ts-transform-paths",
+        "name": "@ovos-media/ts-transform-paths",
+        "transform": "@ovos-media/ts-transform-paths",
         "exclude": ["*"]
       }
     ]
