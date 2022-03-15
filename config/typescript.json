@@ -16,6 +16,7 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "~/*": ["./*"]
     },
