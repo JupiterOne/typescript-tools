@@ -264,7 +264,7 @@ Create `tsconfig.json` at root of your project that contains the contents below.
 
 ```json
 {
-  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node12-monorepo",
+  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node14-monorepo",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist"
@@ -331,7 +331,7 @@ Add this to `tsconfig.json` file at root of project:
 
 ```json
 {
-  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node12",
+  "extends": "./node_modules/@jupiterone/typescript-tools/config/typescript-node14",
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",

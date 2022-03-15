@@ -6,14 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## 16.0.0 - 2022-03-14
+
+- Upgrade all dependencies to latest version
+- These variants are now available for typescript configuration:
+  - typescript-node12.json
+  - typescript-node12-monorepo.json
+  - typescript-node14.json
+  - typescript-node14-monorepo.json
+  - typescript-node16.json
+  - typescript-node16-monorepo.json
+- Enabled `forceConsistentCasingInFileNames` by default for typescript
+- Jest now uses `coverageReporters: ['json-summary', 'text', 'text-summary']`
 
 ## 15.0.0 - 2021-07-14
 
 ### Changed
 
-- Upgraded to `husky@7`, see [README.md](./README.md#migrating-from-husky-4-to-husky-7) for
-  migration instructions.
+- Upgraded to `husky@7`, see
+  [README.md](./README.md#migrating-from-husky-4-to-husky-7) for migration
+  instructions.
 
 ## 14.0.2 - 2021-03-25
 
