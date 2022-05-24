@@ -1,8 +1,0 @@
-{
-  "extends": "./typescript-node12",
-  "compilerOptions": {
-    "declaration": true,
-    "composite": true,
-    "incremental": true
-  }
-}
