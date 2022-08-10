@@ -32,7 +32,7 @@ dependencies:
 If you've been using previous versions of Husky in your project, the newest
 version of Husky requires some package maintenance to keep git hooks working
 (and working better than previously):
-[read more](#installation-/-upgrade-for-previous-projects)
+[read more](#installation-or-upgrade-for-previous-projects)
 
 ## Helper Scripts
 
@@ -504,7 +504,7 @@ Summarized major changes for our use-case are as follows:
 
 - Maintenance needed to upgrade existing hooks to the new format:
 
-### Installation / Upgrade for Previous Projects
+### Installation or Upgrade for Previous Projects
 
 - <b>[Instructions to migrate](https://github.com/typicode/husky-4-to-7) from v4
   to v7 automatically</b>
