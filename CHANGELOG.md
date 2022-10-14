@@ -8,6 +8,17 @@ and this project adheres to
 
 ## Unreleased
 
+## 18.0.0 - 2022-10-14
+
+- Upgrade Jest to v29. Breaking changes can be found
+  [here](https://github.com/facebook/jest/releases/tag/v29.0.0)
+- Upgrade Babel packages
+- Lock installed TypeScript version to v4.7.4 to avoid adopting breaking changes
+  in
+  [v4.8](https://devblogs.microsoft.com/typescript/announcing-typescript-4-8).
+
+## 17.0.0 - 2022-06-14
+
 - Upgrade all dependencies to latest version
 - Removing support for node 12 typescript configuration
 
