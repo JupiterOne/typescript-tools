@@ -1,6 +1,5 @@
 module.exports = {
   clearMocks: true,
-  collectCoverage: true,
   testEnvironment: 'node',
   // Ignore "dist" directories to prevent the following warning:
   // jest-haste-map: Haste module naming collision: @jupiterone/platform-sdk-logging
