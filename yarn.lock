@@ -970,10 +970,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@commitlint/cli@17.0.2":
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-17.0.2.tgz#57c925fb5f09b8e4a83448d94db291ddf7aa58ee"
-  integrity sha512-Axe89Js0YzGGd4gxo3JLlF7yIdjOVpG1LbOorGc6PfYF+drBh14PvarSDLzyd2TNqdylUCq9wb9/A88ZjIdyhA==
+"@commitlint/cli@17.3.0":
+  version "17.3.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-17.3.0.tgz#d8497f03e27a5161178e802168d77de2941959a0"
+  integrity sha512-/H0md7TsKflKzVPz226VfXzVafJFO1f9+r2KcFvmBu08V0T56lZU1s8WL7/xlxqLMqBTVaBf7Ixtc4bskdEEZg==
   dependencies:
     "@commitlint/format" "^17.0.0"
     "@commitlint/lint" "^17.3.0"
@@ -986,10 +986,10 @@
     resolve-global "1.0.0"
     yargs "^17.0.0"
 
-"@commitlint/config-lerna-scopes@17.0.2":
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-lerna-scopes/-/config-lerna-scopes-17.0.2.tgz#6ce9253a57283a99dce79edc8377644853c44df2"
-  integrity sha512-skesAuJwTSnjoeNlPHgPpG8T4L7JZFMpZ2dA2EWWdO9oSRipKFezxoSLJ06mIkoMyWViwHekC9lkPb4FibYyiw==
+"@commitlint/config-lerna-scopes@17.2.1":
+  version "17.2.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-lerna-scopes/-/config-lerna-scopes-17.2.1.tgz#be3b68a9bd3b21e353ee577e47de3d981173591a"
+  integrity sha512-9/dAR2NG16KZmGST1uMJoDIIsyjSxWLkeZ8f+nqt0B2Cg1COsN6d6l3N/0DYgqfDWMr7j9qTl62ES0aoy0lKZw==
   dependencies:
     globby "^11.0.1"
     import-from "4.0.0"
