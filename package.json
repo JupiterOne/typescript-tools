@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "17.1.0",
+  "version": "17.1.1",
   "main": "./index.js",
   "repository": "https://github.com/jupiterone/typescript-tools",
   "author": "Development <development@jupiterone.com>",
@@ -30,8 +30,8 @@
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
-    "@commitlint/cli": "^17.0.2",
-    "@commitlint/config-lerna-scopes": "^17.0.2",
+    "@commitlint/cli": "17.0.2",
+    "@commitlint/config-lerna-scopes": "17.0.2",
     "@jupiterone/eslint-config": "^2.0.0",
     "@ovos-media/ts-transform-paths": "^1.7.18-1",
     "@philidem/rewrite-relative-paths": "^1.2.3",
