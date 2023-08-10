@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 19.0.0
+
+- Upgrade to typescript v5
+- **BREAKING:** Use `tspc` instead of `ttsc`
+
 ## 18.0.0
 
 - Add support for Node 18 typescript and eslint configuration
@@ -128,7 +133,7 @@ If you are building a shareable package use the following command to compile
 your typescript files:
 
 ```sh
-yarn ttsc --declaration -p tsconfig.dist.json
+yarn tspc --declaration -p tsconfig.dist.json
 ```
 
 If you are building a lambda function and you don't need the `*.d.ts` files then

@@ -22,9 +22,8 @@
     },
     "plugins": [
       {
-        "name": "ts-transform-paths",
-        "transform": "ts-transform-paths",
-        "exclude": ["*"]
+        "name": "typescript-transform-paths",
+        "transform": "typescript-transform-paths"
       }
     ]
   }
