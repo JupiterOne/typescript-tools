@@ -1,0 +1,7 @@
+{
+  "extends": "./typescript",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"]
+  }
+}

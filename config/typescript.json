@@ -22,8 +22,8 @@
     },
     "plugins": [
       {
-        "name": "@ovos-media/ts-transform-paths",
-        "transform": "@ovos-media/ts-transform-paths",
+        "name": "ts-transform-paths",
+        "transform": "ts-transform-paths",
         "exclude": ["*"]
       }
     ]
