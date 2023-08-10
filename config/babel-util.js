@@ -4,7 +4,7 @@ function buildPresets(api) {
       '@babel/preset-env',
       {
         targets: {
-          node: api.env('test') ? 'current' : '12',
+          node: api.env('test') ? 'current' : '18',
         },
       },
     ],

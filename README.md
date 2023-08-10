@@ -106,7 +106,7 @@ yarn check-tsconfig --monorepo --repair
 
 # Now compile all packages using project references which allows the
 # typescript compiler to compile your packages in the correct order
-yarn ttsc -b `find ./packages -maxdepth 2 -name tsconfig.dist.json`
+yarn tspc -b `find ./packages -maxdepth 2 -name tsconfig.dist.json`
 ```
 
 **For non-monorepo:**
@@ -114,7 +114,7 @@ yarn ttsc -b `find ./packages -maxdepth 2 -name tsconfig.dist.json`
 ```sh
 # It is recommended to have a tsconfig.dist.json that excludes all test files
 # and use that to compile your typescript files
-yarn ttsc --declaration -p tsconfig.dist.json
+yarn tspc --declaration -p tsconfig.dist.json
 ```
 
 ## Usage: Prettier
