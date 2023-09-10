@@ -310,7 +310,14 @@ async function checkMonorepo() {
       );
     }
 
-    const expected = new Set<string>(
+    const expectedNonDist = new Set<string>(
+      requiredDependencies.map((dep) => {
+        const knownPackage = knownPackages[dep];
+        return `../${knownPackage.dirName}/tsconfig.json`;
+      })
+    );
+
+    const expectedDist = new Set<string>(
       requiredDependencies.map((dep) => {
         const knownPackage = knownPackages[dep];
         return `../${knownPackage.dirName}/tsconfig.dist.json`;
@@ -319,7 +326,7 @@ async function checkMonorepo() {
 
     if (tsconfigObj) {
       await checkTsConfigFile({
-        expectedProjectReferences: expected,
+        expectedProjectReferences: expectedNonDist,
         packageInfo,
         stats,
         tsconfigFile,
@@ -329,7 +336,7 @@ async function checkMonorepo() {
 
     if (tsconfigDistObj) {
       await checkTsConfigFile({
-        expectedProjectReferences: expected,
+        expectedProjectReferences: expectedDist,
         packageInfo,
         stats,
         tsconfigFile: tsconfigDistFile,
