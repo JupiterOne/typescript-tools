@@ -7,5 +7,5 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: '<rootDir>/coverage',
   coverageReporters: ['json-summary', 'text', 'text-summary'],
-  collectCoverageFrom: ['src/**/*.ts'],
+  collectCoverageFrom: ['packages/*/src/**/*.ts'],
 };

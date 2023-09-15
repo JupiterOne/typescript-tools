@@ -19,9 +19,6 @@ dependencies:
 - `husky` (allows you specify git hook scripts inside `.husky/` directory -
   [read more](#usage-husky-7))
 
-- `commmitlint` (optionally require conventional commits -
-  [read more](#usage-commitlint))
-
 - `lint-staged` (used as a `precommit` hook to automatically reformat changed
   source files)
 
@@ -534,30 +531,4 @@ npx husky add .husky/pre-commit 'yarn lint-staged && yarn format'
 npx husky add .husky/pre-push 'yarn test:ci'
 ```
 
-and if following `Conventional Commits` (with a
-[commitlint config](#usage-commitlint)):
-
-```bash
-npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
-```
-
 The above pattern can be used to add hooks for any of the supported git-hooks.
-
-## Usage: Commitlint
-
-[Commitlint](https://github.com/conventional-changelog/commitlint) is a package
-to enforce that users execute git commits with their messages complying to the
-[conventional commit standard](https://www.conventionalcommits.org/en/v1.0.0/).
-It's entirely optional to enable on a package currently-- to do so, just place a
-`commitlint.config.js` file at your project root, and either configure
-independently, or import a common config from this repository. For convenience a
-`lerna-monorepo` style commitlint.config.js is exported from the config
-directory.
-
-Example configuration for a Lerna-maintained monorepo with Conventional Commits:
-
-```javascript
-module.exports = {
-  extends: ['@jupiterone/typescript-tools/config/commitlint-monorepo'],
-};
-```
