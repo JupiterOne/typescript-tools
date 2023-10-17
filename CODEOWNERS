@@ -1,2 +1,3 @@
-* @jupiterone/mercury @jupiterone/integrations @jupiterone/integrations-tooling @jupiterone/data-pipeline
+* @jupiterone/mercury
+
 CODEOWNERS @jupiterone/security

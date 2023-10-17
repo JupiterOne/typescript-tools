@@ -1,10 +1,14 @@
 {
   "name": "@jupiterone/typescript-tools",
   "version": "19.2.0",
-  "main": "./index.js",
-  "repository": "https://github.com/jupiterone/typescript-tools",
-  "author": "Development <development@jupiterone.com>",
+  "description": "Automatically generated package.json, please edit manually",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JupiterOne/typescript-tools"
+  },
   "license": "UNLICENSED",
+  "main": "./index.js",
+  "author": "Development <development@jupiterone.com>",
   "publishConfig": {
     "access": "public"
   },

@@ -1,0 +1,12 @@
+openapi: 3.0.1
+info:
+  title: '@jupiterone/typescript-tools'
+  description: Automatically generated package.json, please edit manually
+  x-cortex-git:
+    github:
+      repository: JupiterOne/typescript-tools
+  x-cortex-owners:
+    - type: group
+      name: JupiterOne/mercury
+  x-cortex-service-groups: tier-4
+  x-cortex-tag: '@jupiterone/typescript-tools'
