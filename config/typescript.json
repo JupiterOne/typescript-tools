@@ -8,6 +8,7 @@
     "alwaysStrict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
+    "noUncheckedIndexedAccess": true,
     "allowJs": true,
     "module": "CommonJS",
     "moduleResolution": "node",
