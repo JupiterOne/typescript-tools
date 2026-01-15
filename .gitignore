@@ -3,6 +3,5 @@ dist/
 coverage/
 node_modules/
 work/
-package-lock.json
 .DS_Store
 .idea/

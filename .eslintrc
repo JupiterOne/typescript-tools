@@ -9,7 +9,6 @@
     "config/"
   ],
   "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "."
+    "project": "./tsconfig.json"
   }
 }

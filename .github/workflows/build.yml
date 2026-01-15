@@ -11,23 +11,23 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - id: setup-node
-        name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Check out code repository source code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Check out code repository source code
-        uses: actions/checkout@v2
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn
+        run: npm ci
 
       - name: Run build
-        run: yarn build
+        run: npm run build
 
       - name: Run lint
-        run: yarn lint
+        run: npm run lint
 
   # Publishing is done in a separate job to allow
   # for all matrix builds to complete.
@@ -35,23 +35,21 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    strategy:
-      fail-fast: false
-      matrix:
-        node: [18]
 
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
       - name: Check out repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
       - name: Check if publish needed
+        id: publish
         run: |
           name="$(jq -r .name package.json)"
           npmver="$(npm show $name version || echo v0.0.0)"
@@ -59,17 +57,24 @@ jobs:
           if [ "$npmver" = "$pkgver" ]
           then
             echo "Package version ($pkgver) is the same as last published NPM version ($npmver), skipping publish."
+            echo "publish=false" >> $GITHUB_ENV
+            echo "publish=false" >> $GITHUB_OUTPUT
           else
             echo "Package version ($pkgver) is different from latest NPM version ($npmver), publishing!"
             echo "publish=true" >> $GITHUB_ENV
+            echo "publish=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Publish
-        if: env.publish == 'true'
+        if: steps.publish.outputs.publish == 'true'
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
-          yarn
-          yarn build
           npm publish
