@@ -8,6 +8,7 @@ import os from 'os';
 
 import yargs from 'yargs';
 import { readJsonFileForCli } from '~/src/readJsonFileForCli';
+import { PackageManifest } from '~/src/types';
 
 const input = yargs
   .option('h', {
@@ -94,7 +95,7 @@ async function publishSinglePackage() {
   const packageDir = process.cwd();
 
   const packageFile = path.join(packageDir, 'package.json');
-  const packageManifest = await readJsonFileForCli(packageFile, console.log);
+  const packageManifest = await readJsonFileForCli<PackageManifest>(packageFile, console.log);
   if (!packageManifest) {
     process.exitCode = 1;
     return;
@@ -110,7 +111,7 @@ async function publishSinglePackage() {
     `You can now run the following in other projects to use this package:\n`
   );
   console.log(
-    ` ${chalk.bold('>')} ${chalk.blue(`npx yalc add ${packageManifest.name}`)}`
+    ` ${chalk.bold('>')} ${chalk.blue(`npx yalc add ${String(packageManifest.name)}`)}`
   );
   console.log('');
 }
@@ -127,6 +128,8 @@ async function run() {
   }
 }
 
-run().catch((err) => {
-  console.error('Error occurred! ' + (err.stack || err.toString()));
+run().catch((err: unknown) => {
+  const message =
+    err instanceof Error ? err.stack ?? String(err) : String(err);
+  console.error('Error occurred! ' + message);
 });

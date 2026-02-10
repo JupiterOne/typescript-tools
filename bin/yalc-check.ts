@@ -81,6 +81,8 @@ async function run() {
   }
 }
 
-run().catch((err) => {
-  console.error('Error occurred! ' + (err.stack || err.toString()));
+run().catch((err: unknown) => {
+  const message =
+    err instanceof Error ? err.stack ?? String(err) : String(err);
+  console.error('Error occurred! ' + message);
 });
