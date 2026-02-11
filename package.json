@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/typescript-tools",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "description": "Shared TypeScript tooling configuration for JupiterOne projects",
   "repository": {
     "type": "git",
