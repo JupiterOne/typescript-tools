@@ -8,7 +8,7 @@ export async function readJsonFileForCli<
   let contents: string;
   try {
     contents = await fs.readFile(file, { encoding: 'utf8' });
-  } catch (err: unknown) {
+  } catch (err) {
     log(
       chalk.yellow(
         `Error reading ${chalk.bold(file)}. ${String(err)} (skipping)`
@@ -20,7 +20,7 @@ export async function readJsonFileForCli<
   let obj: T;
   try {
     obj = JSON.parse(contents) as T;
-  } catch (err: unknown) {
+  } catch (err) {
     log(
       chalk.yellow(
         `Error parsing ${chalk.bold(file)}. ${String(err)} (skipping)`

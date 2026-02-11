@@ -18,7 +18,7 @@ export async function readMonorepoPackagesForCli(options: {
 
   try {
     packagesReadDirResult = await fs.readdir(packagesDir);
-  } catch (err: unknown) {
+  } catch (err) {
     log(
       chalk.yellow(
         `Unable to read monorepo packages at ${chalk.bold(
