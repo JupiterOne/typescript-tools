@@ -335,7 +335,7 @@ async function run() {
   }
 }
 
-run().catch((err: unknown) => {
+run().catch((err) => {
   const message =
     err instanceof Error ? err.stack ?? String(err) : String(err);
   console.error(chalk.red(chalk.bold('Error occurred. ') + message));
