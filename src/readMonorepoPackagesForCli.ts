@@ -23,7 +23,7 @@ export async function readMonorepoPackagesForCli(options: {
       chalk.yellow(
         `Unable to read monorepo packages at ${chalk.bold(
           packagesDir
-        )} (probably not a monorepo). Error: ${err.toString()} (skipping)`
+        )} (probably not a monorepo). Error: ${String(err)} (skipping)`
       )
     );
     return packages;
@@ -37,7 +37,7 @@ export async function readMonorepoPackagesForCli(options: {
     }
 
     const packageFile = path.join(packageDir, 'package.json');
-    const packageManifest: PackageManifest = await readJsonFileForCli(
+    const packageManifest = await readJsonFileForCli<PackageManifest>(
       packageFile,
       log
     );

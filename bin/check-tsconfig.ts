@@ -4,6 +4,8 @@ import chalk from 'chalk';
 import { promises as fs } from 'fs';
 import path from 'path';
 import yargs from 'yargs';
+import { readJsonFileForCli } from '~/src/readJsonFileForCli';
+import { PackageInfo, PackageManifest } from '~/src/types';
 
 const input = yargs
   .option('h', {
@@ -45,52 +47,10 @@ function log(msg: string) {
   console.log(msg);
 }
 
-async function readJsonFile<T>(file: string): Promise<T | undefined> {
-  let contents: string;
-  try {
-    contents = await fs.readFile(file, { encoding: 'utf8' });
-  } catch (err) {
-    log(
-      chalk.yellow(
-        `Error reading ${chalk.bold(file)}. ${err.toString()} (skipping)`
-      )
-    );
-    return undefined;
-  }
-
-  let obj;
-  try {
-    obj = JSON.parse(contents);
-  } catch (err) {
-    log(
-      chalk.yellow(
-        `Error parsing ${chalk.bold(file)}. ${err.toString()} (skipping)`
-      )
-    );
-    return undefined;
-  }
-
-  return obj;
-}
-
-type PackageManifest = {
-  name?: string;
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
-};
-
 type TSConfig = {
   references?: {
     path?: string;
   }[];
-};
-
-type PackageInfo = {
-  packageName: string;
-  dir: string;
-  dirName: string;
-  packageFile: string;
-  packageObj: PackageManifest;
 };
 
 type CheckTSConfigStats = {
@@ -203,7 +163,7 @@ async function checkMonorepo() {
       chalk.yellow(
         `Unable to read monorepo packages at ${chalk.bold(
           packagesDir
-        )} (probably not a monrepo). Error: ${err.toString()} (skipping)`
+        )} (probably not a monrepo). Error: ${String(err)} (skipping)`
       )
     );
     process.exitCode = 3;
@@ -218,12 +178,12 @@ async function checkMonorepo() {
     }
 
     const packageFile = path.join(packageDir, 'package.json');
-    const packageObj = await readJsonFile<PackageManifest>(packageFile);
-    if (!packageObj) {
+    const packageManifest = await readJsonFileForCli<PackageManifest>(packageFile, log);
+    if (!packageManifest) {
       continue;
     }
 
-    const packageName = packageObj.name;
+    const packageName = packageManifest.name;
     if (!packageName) {
       log(
         chalk.yellow(
@@ -250,7 +210,7 @@ async function checkMonorepo() {
       dir: packageDir,
       dirName: packageDirName,
       packageFile,
-      packageObj,
+      packageManifest,
     };
 
     knownPackages[packageName] = packageInfo;
@@ -261,10 +221,10 @@ async function checkMonorepo() {
     log(`\nChecking ${chalk.bold(packageInfo.dirName)}...`);
 
     const tsconfigDistFile = path.join(packageInfo.dir, 'tsconfig.dist.json');
-    const tsconfigDistObj = await readJsonFile<TSConfig>(tsconfigDistFile);
+    const tsconfigDistObj = await readJsonFileForCli<TSConfig>(tsconfigDistFile, log);
 
     const tsconfigFile = path.join(packageInfo.dir, 'tsconfig.json');
-    const tsconfigObj = await readJsonFile<TSConfig>(tsconfigFile);
+    const tsconfigObj = await readJsonFileForCli<TSConfig>(tsconfigFile, log);
 
     if (!tsconfigObj && !tsconfigDistObj) {
       console.log(
@@ -285,12 +245,12 @@ async function checkMonorepo() {
       }
     };
 
-    if (packageInfo.packageObj.dependencies) {
-      processDependencies(Object.keys(packageInfo.packageObj.dependencies));
+    if (packageInfo.packageManifest.dependencies) {
+      processDependencies(Object.keys(packageInfo.packageManifest.dependencies));
     }
 
-    if (packageInfo.packageObj.devDependencies) {
-      processDependencies(Object.keys(packageInfo.packageObj.devDependencies));
+    if (packageInfo.packageManifest.devDependencies) {
+      processDependencies(Object.keys(packageInfo.packageManifest.devDependencies));
     }
 
     const requiredDependencies = [...requiredDependenciesSet];
@@ -376,7 +336,7 @@ async function run() {
 }
 
 run().catch((err) => {
-  console.error(
-    chalk.red(chalk.bold('Error occurred. ') + (err.stack || err.toString()))
-  );
+  const message =
+    err instanceof Error ? err.stack ?? String(err) : String(err);
+  console.error(chalk.red(chalk.bold('Error occurred. ') + message));
 });
