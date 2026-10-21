@@ -1,0 +1,7 @@
+{
+  "extends": "./typescript",
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024"]
+  }
+}
