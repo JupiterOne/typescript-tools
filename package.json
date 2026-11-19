@@ -55,7 +55,7 @@
     "typescript": "^5.8.3",
     "typescript-transform-paths": "^3.5.4",
     "yalc": "^1.0.0-pre.53",
-    "yargs": "^18.0.0"
+    "yargs": "^17.7.3"
   },
   "files": [
     "LICENSE",

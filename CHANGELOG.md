@@ -8,6 +8,8 @@ and this project adheres to
 
 # 20.2.0
 
+- Restore `yargs` 17 so the `check-tsconfig`, `yalc-check` and `yalc-publish`
+  bins run again (yargs 18 is ESM-only and has no singleton `.option`)
 - `typescript-node24` and `typescript-node24-monorepo` presets use `module` and
   `moduleResolution` `Node16`, so package `exports` maps resolve (subpath
   imports and `types` conditions). CommonJS output is unchanged for packages
