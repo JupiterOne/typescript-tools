@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 20.2.0
+
+- Restore `yargs` 17 so the `check-tsconfig`, `yalc-check` and `yalc-publish`
+  bins run again (yargs 18 is ESM-only and has no singleton `.option`)
+- `typescript-node24` and `typescript-node24-monorepo` presets use `module` and
+  `moduleResolution` `Node16`, so package `exports` maps resolve (subpath
+  imports and `types` conditions). CommonJS output is unchanged for packages
+  without `"type": "module"`.
+
 # 20.1.0
 
 - Add `typescript-node24` and `typescript-node24-monorepo` presets (`target` and
